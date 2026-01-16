@@ -1,0 +1,13 @@
+{
+  "name": "content-engine",
+  "private": true,
+  "version": "0.0.1",
+  "type": "module",
+  "scripts": {
+    "generate:tools": "node ./src/generate-tools.mjs",
+    "generate:consumer": "node ./src/generate-consumer.mjs"
+  },
+  "dependencies": {
+    "date-fns": "^3.6.0"
+  }
+}

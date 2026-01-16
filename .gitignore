@@ -1,0 +1,21 @@
+# dependencies
+node_modules
+**/node_modules
+
+# next
+.next
+out
+
+# logs
+*.log
+
+# env
+.env
+.env.local
+.env.*.local
+
+# turbo
+.turbo
+
+# misc
+.DS_Store

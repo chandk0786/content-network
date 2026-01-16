@@ -1,0 +1,41 @@
+name: Weekly Content Generation
+
+on:
+  schedule:
+    - cron: "30 2 * * 1" # every Monday 02:30 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install pnpm
+        run: npm i -g pnpm
+
+      - name: Install deps
+        run: pnpm install
+
+      - name: Generate content (tools)
+        run: pnpm generate:tools
+
+      - name: Generate content (consumer)
+        run: pnpm generate:consumer
+
+      - name: Commit & push if changed
+        run: |
+          git config user.name "content-bot"
+          git config user.email "content-bot@users.noreply.github.com"
+          git add .
+          git diff --cached --quiet || git commit -m "Weekly content update"
+          git push

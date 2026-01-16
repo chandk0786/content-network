@@ -1,0 +1,16 @@
+{
+  "name": "content-network",
+  "private": true,
+  "packageManager": "pnpm@9.0.0",
+  "scripts": {
+    "dev:tools": "pnpm --filter site-tools dev",
+    "dev:consumer": "pnpm --filter site-consumer dev",
+    "build": "turbo run build",
+    "lint": "turbo run lint",
+    "generate:tools": "pnpm --filter content-engine generate:tools",
+    "generate:consumer": "pnpm --filter content-engine generate:consumer"
+  },
+  "devDependencies": {
+    "turbo": "^2.0.0"
+  }
+}
