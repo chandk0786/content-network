@@ -6,8 +6,11 @@ export async function generateStaticParams() {
   return getAllSlugs("post").map((slug) => ({ slug }));
 }
 
-export default async function BlogPost({ params }: { params: { slug: string } }) {
-  const file = getMdxPath("post", params.slug);
+export default async function BlogPost(
+  { params }: { params: Promise<{ slug: string }> }
+) {
+  const { slug } = await params;
+  const file = getMdxPath("post", slug);
   const source = fs.readFileSync(file, "utf8");
   const { content, frontmatter } = await compileMDX<{ title: string; description?: string; date?: string }>({
     source,
